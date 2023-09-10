@@ -15,7 +15,7 @@ class User(Base):
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
     def __init__(self, username, password, email):
-        self.id = id
+        #self.id = id
         self.username = username
         self.password = password
         self.email = email

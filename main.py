@@ -17,7 +17,7 @@ Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-#new_user = create_user(session, "marta00", "#pass00", "marta00@fi.uba.ar")
+#new_user = create_user(session, "marta04", "#pass04", "marta04@fi.uba.ar")
 #new_user = create_user(session, "marta01", "#pass01", "marta01@fi.uba.ar")
 #new_user = create_user(session, "marta02", "#pass02", "marta02@fi.uba.ar")
 #new_user = create_user(session, "marta03", "#pass03", "marta03@fi.uba.ar")

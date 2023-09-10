@@ -10,6 +10,11 @@ pip install SQLAlchemy
 pip install psycopg2-binary
 ```
 
+```
+pip install alembic
+```
+
+
 Para hacer una migración de la base de datos:
 
 ```
