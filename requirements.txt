@@ -1,0 +1,6 @@
+SQLAlchemy
+psycopg2
+alembic
+uvicorn
+fastapi
+pydantic
