@@ -1,5 +1,15 @@
 # Prueba base de datos usuario
 
+install:
+
+```
+pip install SQLAlchemy
+```
+
+```
+pip install psycopg2-binary
+```
+
 Para hacer una migración de la base de datos:
 
 ```
@@ -19,5 +29,7 @@ esta todo comentado salvo la que imprime las filas de la tabla
 ```
 python3 main.py
 ```
+
+
 
 
