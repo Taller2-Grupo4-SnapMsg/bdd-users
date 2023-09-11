@@ -132,4 +132,14 @@ async def get_user_by_mail(mail: str):
         raise HTTPException(status_code=400, detail="Mail does not exist")
     return user
 
+@app.delete("/delete_user_by_mail")
+async def delete_user_by_mail(mail: str):
+    """
+    Delete user by email.
+    """
+    user = get_user_by_mail_db(session, mail)
+    if user is None:
+        raise HTTPException(status_code=400, detail="Mail does not exist")
+    delete_user_db(session, user.id)
+
 session.close()
