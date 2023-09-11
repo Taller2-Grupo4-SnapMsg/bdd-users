@@ -10,13 +10,13 @@ def get_user_by_username(session, username):
 def create_user(session, username, surname, name, password, email, date_of_birth):
     user = User(username=username, surname=surname, name=name, password=password,
                 email=email, date_of_birth=date_of_birth)
-    try:
-        session.add(user)
-        session.commit()
-        return "User created successfully"
-    except IntegrityError:
-        session.rollback()
-        return None
+    # try:
+    session.add(user)
+    session.commit()
+    return user
+    # except IntegrityError:
+    #     session.rollback()
+    #     return None
     
 def update_user(session, user_id, new_data):
     user = session.query(User).filter(User.id == user_id).first()
