@@ -1,4 +1,5 @@
 from .model import User
+from sqlalchemy.exc import IntegrityError
 
 def get_user_by_id(session, user_id):
     return session.query(User).filter(User.id == user_id).first()
@@ -7,12 +8,16 @@ def get_user_by_username(session, username):
     return session.query(User).filter(User.username == username).first()
 
 def create_user(session, username, surname, name, password, email, date_of_birth):
-    user = User(username=username, surname=surname, name=name, password=password, 
+    user = User(username=username, surname=surname, name=name, password=password,
                 email=email, date_of_birth=date_of_birth)
-    session.add(user)
-    session.commit()
-    return user
-
+    try:
+        session.add(user)
+        session.commit()
+        return user
+    except IntegrityError:
+        session.rollback()
+        return None
+    
 def update_user(session, user_id, new_data):
     user = session.query(User).filter(User.id == user_id).first()
     if user:

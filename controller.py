@@ -4,10 +4,10 @@ from models.users.model import User
 from models.users.queries import get_user_by_username as get_user_by_username_db
 from models.users.queries import get_user_by_id as get_user_by_id_db
 from models.users.queries import delete_user as delete_user_db
-from models.users.queries import get_user_by_username as create_user
+from models.users.queries import create_user
 from models.users.model import Base
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 #Esto es lo que iria en el backend para conectarme y tendria que ver como importar las funciones para utilizar la bdd
@@ -59,7 +59,15 @@ async def register_new_user(user: UserRegistration):
     """
     Register a new user
     """
-    new_user = create_user(session, user.username, user.surname, user.name, user.password, user.email, user.date_of_birth)
+    new_user = create_user(session,
+                           user.username,
+                           user.surname,
+                           user.name,
+                           user.password,
+                           user.email,
+                           user.date_of_birth)
+    if new_user is None:
+        raise HTTPException(status_code=400, detail="Username or email already exists")
     return new_user
 
 @app.delete("/delete_user")
