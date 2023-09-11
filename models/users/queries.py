@@ -13,7 +13,7 @@ def create_user(session, username, surname, name, password, email, date_of_birth
     try:
         session.add(user)
         session.commit()
-        return user
+        return "User created successfully"
     except IntegrityError:
         session.rollback()
         return None
