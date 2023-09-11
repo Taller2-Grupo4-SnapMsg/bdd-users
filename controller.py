@@ -1,7 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models.users.model import User
-from models.users.queries import *
+from models.users.queries import get_user_by_username as get_user_by_username_db
+from models.users.queries import get_user_by_id as get_user_by_id_db
+from models.users.queries import delete_user_db as delete_user_db
+from models.users.queries import get_user_by_username as create_user
 from models.users.model import Base
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
@@ -64,20 +67,20 @@ async def delete_user(user_id: int):
     """
     Delete user
     """
-    delete_user(session, user_id)
+    delete_user_db(session, user_id)
 
 @app.get("/get_user_by_id")
 async def get_user_by_id(user_id: int):
     """
     Obtener usuario por id
     """
-    get_user_by_id(session, user_id)
+    get_user_by_id_db(session, user_id)
 
 @app.get("/get_user_by_username")
 async def get_user_by_username(username: str):
     """
     Obtener usuario por username
     """
-    get_user_by_username(session, username)
+    get_user_by_username_db(session, username)
 
 session.close()
