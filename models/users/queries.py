@@ -5,7 +5,10 @@ def get_user_by_id(session, user_id):
     return session.query(User).filter(User.id == user_id).first()
 
 def get_user_by_username(session, username):
-    return session.query(User).filter(User.username == username).first()
+    return session.query(User).filter(User.username == username).first() #Por que first? deberia ser unico.
+
+def get_user_by_mail(session, mail):
+    return session.query(User).filter(User.email == mail).first()
 
 def create_user(session, username, surname, name, password, email, date_of_birth):
     user = User(username=username, surname=surname, name=name, password=password,

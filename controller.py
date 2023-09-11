@@ -4,6 +4,7 @@ from models.users.model import User
 from models.users.queries import get_user_by_username as get_user_by_username_db
 from models.users.queries import get_user_by_id as get_user_by_id_db
 from models.users.queries import delete_user as delete_user_db
+from models.users.queries import get_user_by_mail as get_user_by_mail_db
 from models.users.queries import create_user
 from models.users.model import Base
 from fastapi.middleware.cors import CORSMiddleware
@@ -58,6 +59,15 @@ class UserRegistration(BaseModel):
 async def register_new_user(user: UserRegistration):
     """
     Register a new user
+
+    Args:
+        user (UserRegistration): The user to register.
+    
+    Returns:
+        UserRegistration: The user that was registered.
+    
+    Raises:
+        HTTPException: Returns a 400 Bad Request if the username or email already exists.
     """
     new_user = create_user(session,
                            user.username,
@@ -87,8 +97,39 @@ async def get_user_by_id(user_id: int):
 @app.get("/get_user_by_username")
 async def get_user_by_username(username: str):
     """
-    Obtener usuario por username
+    Gets user details by username.
+
+    Args:
+        username (str): The username of the user to retrieve.
+    
+    Returns:
+        UserRegistration: User details.
+
+    Raises:
+        HTTPException: Returns a 400 Bad Request if the username does not exist.
     """
-    return get_user_by_username_db(session, username)
+    user = get_user_by_username_db(session, username)
+    if user is None:
+        raise HTTPException(status_code=400, detail="Username does not exist")
+    return user
+
+@app.get("/get_user_by_mail", response_model=UserRegistration)
+async def get_user_by_mail(mail: str):
+    """
+    Get user details by email.
+
+    Args:
+        mail (str): The email of the user to retrieve.
+
+    Returns:
+        UserResponseModel: User details.
+
+    Raises:
+        HTTPException: Returns a 400 Bad Request if the email does not exist.
+    """
+    user = get_user_by_mail_db(session, mail)
+    if user is None:
+        raise HTTPException(status_code=400, detail="Mail does not exist")
+    return user
 
 session.close()
