@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from models.users.model import User
 from models.users.queries import *
 from models.users.model import Base
+from sqlalchemy.sql import text
 
 #Esto es lo que iria en el backend para conectarme y tendria que ver como importar las funciones para utilizar la bdd
 
@@ -29,5 +30,14 @@ for user in users:
     print(f"ID: {user.id}, Username: {user.username}, Password: {user.password}, Email: {user.email}")
 
 session.close()
+
+def app():
+    with engine.connect() as conn:
+        stmt = text("select * from pg_database")
+        #print(conn.execute(stmt).fetchall())
+
+
+if __name__ == "__main__":
+    app()
 
 

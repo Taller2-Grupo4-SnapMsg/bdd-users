@@ -14,11 +14,10 @@ pip install psycopg2-binary
 pip install alembic
 ```
 
-
-Para hacer una migración de la base de datos:
+Configurar la variable de entorno:
 
 ```
-alembic revision --autogenerate -m "motivo de la migración"
+export DB_URI="postgresql://cwfvbvxl:jtsNDRjbVqGeBgYcYvxGps3LLlX_t-P5@berry.db.elephantsql.com:5432/cwfvbvxl"
 ```
 
 Para aplicar la migracion:
@@ -26,6 +25,13 @@ Para aplicar la migracion:
 ```
 alembic upgrade head
 ```
+
+Para hacer una migración de la base de datos:
+
+```
+alembic revision --autogenerate -m "motivo de la migración"
+```
+
 
 Para hacer las consultas o modificaciones en models/users/queries.py 
 hay algunas funciones que se importaron al main y se pueden usar desde ahi, 
