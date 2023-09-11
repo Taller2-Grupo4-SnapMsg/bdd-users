@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from models.users.model import User
 from models.users.queries import get_user_by_username as get_user_by_username_db
 from models.users.queries import get_user_by_id as get_user_by_id_db
-from models.users.queries import delete_user_db as delete_user_db
+from models.users.queries import delete_user as delete_user_db
 from models.users.queries import get_user_by_username as create_user
 from models.users.model import Base
 from fastapi.middleware.cors import CORSMiddleware
@@ -74,13 +74,13 @@ async def get_user_by_id(user_id: int):
     """
     Obtener usuario por id
     """
-    get_user_by_id_db(session, user_id)
+    return get_user_by_id_db(session, user_id)
 
 @app.get("/get_user_by_username")
 async def get_user_by_username(username: str):
     """
     Obtener usuario por username
     """
-    get_user_by_username_db(session, username)
+    return get_user_by_username_db(session, username)
 
 session.close()
