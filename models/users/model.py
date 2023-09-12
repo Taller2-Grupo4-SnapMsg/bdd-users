@@ -11,7 +11,7 @@ class User(Base):
     username = Column(String(50), unique=True, nullable=False)
     surname = Column(String(50), nullable=False)
     name = Column(String(50), nullable=False)
-    password = Column(String(50), nullable=False)
+    password = Column(String(200), nullable=False)
     email = Column(String(100), unique=True, nullable=False)
     date_of_birth = Column(String(100))
     created_at = Column(DateTime, default=datetime.datetime.utcnow)

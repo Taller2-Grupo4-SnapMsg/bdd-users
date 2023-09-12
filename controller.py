@@ -17,7 +17,7 @@ from pydantic import BaseModel
 engine = create_engine("postgresql://cwfvbvxl:jtsNDRjbVqGeBgYcYvxGps3LLlX_t-P5@berry.db.elephantsql.com:5432/cwfvbvxl")
 
 # Crea las tablas en la base de datos (esto creará todas las tablas definidas en tus modelos)
-Base.metadata.create_all(engine)
+Base.metadata.create_all(engine) #seguro que es necesario?
 
 # Crear una sesión para interactuar con la base de datos
 Session = sessionmaker(bind=engine)
